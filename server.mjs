@@ -179,15 +179,27 @@ function normalizeAnalysis(input, analysis) {
     ...normalized.inferred_risks
   ].join(" ").toLowerCase();
 
-  const trappedPeople = /(trapped|stranded|stuck|cut off|missing|swept)/.test(evidenceText);
+  const trappedPeople = /(trapped|stranded|stuck|cut off|swept away|people missing|person missing|missing (person|people|child|children|adult|adults|family|families|resident|residents))/i.test(evidenceText);
   const waterOrStructure = /(flood|water rising|rising water|bridge|collapse|crack|structural)/.test(evidenceText);
   const medicalRisk = /(elderly|medicine|injur|unconscious|bleeding|medical)/.test(evidenceText);
+  const roadOrBridgeDamage = /((road|bridge|surface|asphalt).{0,80}(crack|broken|damaged|failure|washed|collapsed))|((crack|broken|damaged|failure|washed|collapsed).{0,80}(road|bridge|surface|asphalt))/i.test(evidenceText);
   const current = String(normalized.severity || "unknown").toLowerCase();
 
   if ((trappedPeople && waterOrStructure) || (trappedPeople && medicalRisk)) {
     if ((severityRank[current] ?? -1) < severityRank.high) {
       normalized.severity = "high";
+      normalized.audit_notes = normalized.audit_notes.filter((note) => !/(low severity|medium severity|escalation is not required|escalation is not needed|no immediate life-threatening)/i.test(note));
       normalized.audit_notes.push("Safety guard upgraded severity to high because the evidence indicates trapped or stranded people with water, structural, or medical risk.");
+    }
+    normalized.escalation_required = true;
+  } else if (roadOrBridgeDamage) {
+    if (normalized.incident_type === "unknown") {
+      normalized.incident_type = "road_block";
+    }
+    if ((severityRank[current] ?? -1) < severityRank.medium) {
+      normalized.severity = "medium";
+      normalized.audit_notes = normalized.audit_notes.filter((note) => !/(low severity|escalation is not required|escalation is not needed)/i.test(note));
+      normalized.audit_notes.push("Safety guard upgraded severity to medium because visible road or bridge damage requires access control and engineering assessment.");
     }
     normalized.escalation_required = true;
   }
