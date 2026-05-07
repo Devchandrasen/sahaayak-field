@@ -11,7 +11,7 @@ The prototype demonstrates a low-connectivity workflow for trained volunteers. T
 
 ## Architecture
 
-The app has three layers. The browser layer provides incident intake, image preview, triage display, structured JSON output, and offline packet storage through localStorage. The Node layer serves the app and exposes `/api/analyze`. The model layer calls Gemma 4 through an Ollama-compatible local chat endpoint. The model name and endpoint are configurable with `GEMMA_MODEL` and `OLLAMA_URL`, allowing the same interface to run against different Gemma 4 variants and local runtimes.
+The app has three layers. The browser layer provides incident intake, image preview, triage display, structured JSON output, and offline packet storage through localStorage. The Node layer serves the app and exposes `/api/analyze`. The model layer calls Gemma 4 through an Ollama-compatible local chat endpoint. The current demo uses `gemma4:e2b`, a local GGUF model pulled through Ollama. The model name and endpoint are configurable with `GEMMA_MODEL` and `OLLAMA_URL`, allowing the same interface to run against different Gemma 4 variants and local runtimes.
 
 For development safety, the repository includes an explicit deterministic fallback when Ollama is unavailable. This fallback is labeled in the UI and exists only to keep the demo operable on machines where Gemma 4 has not been installed. The final submission run uses the real Gemma 4 adapter, visible in the status bar and verified by server logs.
 
@@ -27,7 +27,7 @@ This project intentionally wraps the model with product constraints. The UI show
 
 We chose a small, dependency-light web prototype because hackathon judging rewards a working product over a complex stack. Node's built-in HTTP server keeps setup simple, while the browser UI is fast enough to run on modest laptops. Ollama is used as the first local runtime target because it is easy for judges and developers to reproduce. The architecture leaves room for a mobile build using LiteRT or a resource-constrained build using llama.cpp.
 
-The model output is constrained to a fixed schema so downstream systems can validate, store, transmit, and review each packet. The severity decision is not hidden: the app displays observed facts, inferred risks, and audit notes. This matters because emergency response workflows require trust, not just fluency.
+The model output is constrained to a fixed schema so downstream systems can validate, store, transmit, and review each packet. The Node layer also applies a deterministic safety guard: if evidence indicates trapped or stranded people with rising water, structural risk, or medical risk, severity is upgraded to at least high and the reason is appended to the audit trail. The severity decision is not hidden: the app displays observed facts, inferred risks, and audit notes. This matters because emergency response workflows require trust, not just fluency.
 
 ## Challenges
 
@@ -36,4 +36,3 @@ The hardest design challenge was balancing speed with responsibility. A field as
 ## Impact
 
 Sahaayak Field is a proof of concept for community-scale resilience. It can help volunteers produce better incident reports, reduce command-center ambiguity, and preserve an auditable record of early decisions. In future versions, the same architecture can ingest local standard operating procedures, shelter capacity lists, supply inventories, and offline maps. The goal is not to replace responders. The goal is to give them a faster, clearer, more trustworthy first packet when every minute matters.
-

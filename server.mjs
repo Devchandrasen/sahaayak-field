@@ -10,7 +10,7 @@ const systemPromptPath = path.join(__dirname, "prompts", "gemma-system.md");
 
 const PORT = Number(process.env.PORT || 4173);
 const OLLAMA_URL = process.env.OLLAMA_URL || "http://localhost:11434/api/chat";
-const GEMMA_MODEL = process.env.GEMMA_MODEL || "gemma4:e4b";
+const GEMMA_MODEL = process.env.GEMMA_MODEL || "gemma4:e2b";
 const FORCE_DEMO = process.env.USE_DEMO === "1";
 
 const mimeTypes = {
@@ -147,6 +147,54 @@ function demoAnalysis(input) {
   };
 }
 
+const severityRank = {
+  low: 0,
+  medium: 1,
+  high: 2,
+  critical: 3
+};
+
+function toArray(value) {
+  if (Array.isArray(value)) return value;
+  if (value === undefined || value === null || value === "") return [];
+  return [String(value)];
+}
+
+function normalizeAnalysis(input, analysis) {
+  const normalized = {
+    ...analysis,
+    observed_facts: toArray(analysis.observed_facts),
+    inferred_risks: toArray(analysis.inferred_risks),
+    immediate_actions: toArray(analysis.immediate_actions),
+    resources_needed: toArray(analysis.resources_needed),
+    missing_information: toArray(analysis.missing_information),
+    audit_notes: toArray(analysis.audit_notes)
+  };
+
+  const evidenceText = [
+    input.report,
+    normalized.incident_type,
+    normalized.radio_message,
+    ...normalized.observed_facts,
+    ...normalized.inferred_risks
+  ].join(" ").toLowerCase();
+
+  const trappedPeople = /(trapped|stranded|stuck|cut off|missing|swept)/.test(evidenceText);
+  const waterOrStructure = /(flood|water rising|rising water|bridge|collapse|crack|structural)/.test(evidenceText);
+  const medicalRisk = /(elderly|medicine|injur|unconscious|bleeding|medical)/.test(evidenceText);
+  const current = String(normalized.severity || "unknown").toLowerCase();
+
+  if ((trappedPeople && waterOrStructure) || (trappedPeople && medicalRisk)) {
+    if ((severityRank[current] ?? -1) < severityRank.high) {
+      normalized.severity = "high";
+      normalized.audit_notes.push("Safety guard upgraded severity to high because the evidence indicates trapped or stranded people with water, structural, or medical risk.");
+    }
+    normalized.escalation_required = true;
+  }
+
+  return normalized;
+}
+
 async function callGemma(input) {
   const systemPrompt = await readFile(systemPromptPath, "utf8");
   const userPrompt = [
@@ -166,7 +214,7 @@ async function callGemma(input) {
   if (image) userMessage.images = [image];
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 45000);
+  const timeout = setTimeout(() => controller.abort(), 120000);
 
   try {
     const response = await fetch(OLLAMA_URL, {
@@ -175,6 +223,7 @@ async function callGemma(input) {
       body: JSON.stringify({
         model: GEMMA_MODEL,
         stream: false,
+        format: "json",
         messages: [
           { role: "system", content: systemPrompt },
           userMessage
@@ -201,7 +250,7 @@ async function callGemma(input) {
     return {
       engine: "ollama",
       model: GEMMA_MODEL,
-      analysis: parsed,
+      analysis: normalizeAnalysis(input, parsed),
       raw: content
     };
   } finally {

@@ -2,7 +2,7 @@
 
 Local-first disaster triage assistant for the Kaggle Gemma 4 Good Hackathon.
 
-Sahaayak Field helps trained volunteers turn messy field evidence into an auditable response packet when connectivity is weak. A volunteer can submit a scene image, short report, location hint, language preference, and connectivity state. Gemma 4 returns a structured incident type, severity, next actions, resource request, radio message, and evidence trail.
+Sahaayak Field helps trained volunteers turn messy field evidence into an auditable response packet when connectivity is weak. A volunteer can submit a scene image, short report, location hint, language preference, and connectivity state. Gemma 4 returns a structured incident type, severity, next actions, resource request, radio message, and evidence trail. A deterministic safety guard validates Gemma's packet and upgrades severity when evidence indicates trapped people, rising water, structural danger, or medical risk.
 
 ![Sahaayak Field demo](media/app-screenshot.png)
 
@@ -31,6 +31,12 @@ Requirements:
 - Node.js 20 or newer
 - Optional: Ollama with a Gemma 4 model pulled locally
 
+One-command local model setup on Windows:
+
+```powershell
+.\scripts\setup-gemma.ps1
+```
+
 Start the app:
 
 ```powershell
@@ -46,7 +52,7 @@ http://localhost:4173
 Use a local Gemma 4 model through Ollama:
 
 ```powershell
-$env:GEMMA_MODEL="gemma4:e4b"
+$env:GEMMA_MODEL="gemma4:e2b"
 $env:OLLAMA_URL="http://localhost:11434/api/chat"
 npm start
 ```
@@ -63,6 +69,7 @@ The app falls back to deterministic demo output if Ollama is not reachable. For 
 ## Repository Map
 
 - `server.mjs` - Static server and Gemma 4/Ollama inference adapter
+- `scripts/setup-gemma.ps1` - Windows setup helper for Ollama and `gemma4:e2b`
 - `prompts/gemma-system.md` - Safety-focused system prompt
 - `public/` - Browser app, styles, client logic, sample incident asset
 - `docs/writeup-draft.md` - Kaggle Writeup draft under 1,500 words

@@ -110,7 +110,7 @@ async function fileToDataUrl(file) {
 }
 
 async function loadSampleImage() {
-  const response = await fetch("/assets/sample-incident.svg");
+  const response = await fetch("/assets/sample-incident.png");
   const blob = await response.blob();
   imageData = await fileToDataUrl(blob);
   elements.preview.src = imageData;
