@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" role="img" aria-label="Flooded road and damaged bridge sample scene">
+  <rect width="1280" height="820" fill="#d8e7ee"/>
+  <path d="M0 516c125-46 227-68 327-57 101 11 174 55 284 59 132 5 243-50 369-54 98-3 186 25 300 67v289H0z" fill="#6f9db2"/>
+  <path d="M0 604c113-33 219-47 319-34 118 16 189 58 306 63 121 5 230-37 348-42 114-5 202 24 307 62v167H0z" fill="#477c92"/>
+  <path d="M118 418h363l-36 76H69z" fill="#555f66"/>
+  <path d="M806 410h369l45 78H842z" fill="#555f66"/>
+  <path d="M479 418h75l-34 76h-75z" fill="#3f464c"/>
+  <path d="M724 410h82l36 78h-80z" fill="#3f464c"/>
+  <path d="M557 438l38 22 43-27 38 31 49-25 36 49H523z" fill="#c54b3f"/>
+  <rect x="93" y="363" width="81" height="52" rx="6" fill="#f4c542"/>
+  <rect x="102" y="374" width="24" height="17" rx="3" fill="#263238"/>
+  <rect x="136" y="374" width="24" height="17" rx="3" fill="#263238"/>
+  <circle cx="111" cy="421" r="12" fill="#263238"/>
+  <circle cx="155" cy="421" r="12" fill="#263238"/>
+  <rect x="930" y="324" width="190" height="82" rx="4" fill="#fafafa"/>
+  <rect x="952" y="343" width="146" height="15" fill="#d94841"/>
+  <rect x="952" y="371" width="92" height="12" fill="#6f7c85"/>
+  <rect x="1080" y="371" width="18" height="12" fill="#6f7c85"/>
+  <path d="M187 557c41-31 89-31 144 0M708 574c47-34 100-34 159 0M953 617c62-43 129-42 198 2" fill="none" stroke="#e5f7ff" stroke-width="10" stroke-linecap="round" opacity=".72"/>
+  <path d="M0 247c107-74 242-108 406-102 176 7 297 82 451 75 133-6 259-72 423-51v-169H0z" fill="#92b685"/>
+  <path d="M162 269l64-91 72 91zM1041 234l52-79 65 79z" fill="#5d7d55"/>
+  <rect x="0" y="682" width="1280" height="138" fill="#244c5c" opacity=".35"/>
+</svg>

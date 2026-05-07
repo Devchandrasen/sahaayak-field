@@ -1,0 +1,41 @@
+{
+  "incident_type": "flood",
+  "severity": "high",
+  "confidence": 0.82,
+  "observed_facts": [
+    "Water is rising near the old bridge.",
+    "Two families are reported to be stuck on the far side.",
+    "The road is cracked near the middle span.",
+    "Mobile data is weak."
+  ],
+  "inferred_risks": [
+    "The cracked span may become unsafe for foot or vehicle crossing.",
+    "Families may become isolated if water rises further.",
+    "An elderly person may need time-sensitive medication support."
+  ],
+  "immediate_actions": [
+    "Keep civilians away from the bridge and cracked road surface.",
+    "Send one trained volunteer to identify a safe access route without crossing the damaged span.",
+    "Confirm headcount and medication need by voice or line-of-sight if possible.",
+    "Transmit the radio message to command and request rescue support."
+  ],
+  "resources_needed": [
+    "2 trained responders",
+    "first aid kit",
+    "rope and flotation aid",
+    "portable lights",
+    "structural assessment support"
+  ],
+  "escalation_required": true,
+  "missing_information": [
+    "Exact GPS coordinates",
+    "Number and age of people stranded",
+    "Current water depth and rate of rise",
+    "Nearest safe staging point"
+  ],
+  "radio_message": "HIGH FLOOD/STRUCTURAL risk at Ward 7 old market bridge. Two families stranded beyond rising water. Road cracked near span. Keep civilians clear. Need responders, first aid, flotation aid, GPS, headcount.",
+  "audit_notes": [
+    "Severity is high due to rising water, stranded families, and possible bridge damage.",
+    "Escalation is required because structural and water rescue risks are present."
+  ]
+}

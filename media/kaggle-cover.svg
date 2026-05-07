@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Sahaayak Field cover image">
+  <rect width="1600" height="900" fill="#172026"/>
+  <path d="M0 585c138-72 269-98 393-78 147 24 241 88 391 91 157 3 290-65 437-72 132-6 248 30 379 88v286H0z" fill="#2f5e8f"/>
+  <path d="M0 676c143-42 267-54 371-36 139 24 245 75 391 79 170 5 311-50 465-58 134-7 247 29 373 88v151H0z" fill="#0f766e"/>
+  <path d="M130 458h448l-50 96H72z" fill="#76828a"/>
+  <path d="M983 447h461l60 99h-470z" fill="#76828a"/>
+  <path d="M581 465l76 48 73-55 74 58 92-49 80 78H527z" fill="#bd2f2f"/>
+  <rect x="98" y="379" width="146" height="74" rx="8" fill="#f3c24f"/>
+  <rect x="116" y="396" width="38" height="24" rx="3" fill="#172026"/>
+  <rect x="171" y="396" width="48" height="24" rx="3" fill="#172026"/>
+  <circle cx="135" cy="465" r="18" fill="#172026"/>
+  <circle cx="211" cy="465" r="18" fill="#172026"/>
+  <rect x="1056" y="280" width="280" height="124" rx="10" fill="#f7f9fb"/>
+  <rect x="1088" y="312" width="210" height="20" fill="#bd2f2f"/>
+  <rect x="1088" y="352" width="154" height="15" fill="#5c6870"/>
+  <rect x="1268" y="352" width="30" height="15" fill="#5c6870"/>
+  <text x="116" y="150" fill="#b8d8d4" font-family="Arial, sans-serif" font-size="32" font-weight="700">GEMMA 4 LOCAL-FIRST RESPONSE</text>
+  <text x="116" y="244" fill="#ffffff" font-family="Arial, sans-serif" font-size="82" font-weight="800">Sahaayak Field</text>
+  <text x="116" y="306" fill="#dbe8ea" font-family="Arial, sans-serif" font-size="34" font-weight="600">Offline disaster triage when the network fails</text>
+  <rect x="116" y="725" width="482" height="58" rx="8" fill="#f7f9fb"/>
+  <text x="146" y="763" fill="#172026" font-family="Arial, sans-serif" font-size="28" font-weight="800">Photo + report to response packet</text>
+</svg>

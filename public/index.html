@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sahaayak Field</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Gemma 4 local-first response</p>
+        <h1>Sahaayak Field</h1>
+      </div>
+      <div class="status">
+        <span id="engineDot" class="dot"></span>
+        <span id="engineLabel">Checking model</span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="panel intake">
+        <div class="panelHead">
+          <h2>Incident Intake</h2>
+          <button id="loadSample" class="ghost" type="button">Load sample</button>
+        </div>
+
+        <label class="field">
+          <span>Scene image</span>
+          <input id="imageInput" type="file" accept="image/*">
+        </label>
+
+        <img id="preview" class="preview" src="/assets/sample-incident.svg" alt="Flooded road and damaged bridge sample scene">
+
+        <label class="field">
+          <span>Location</span>
+          <input id="location" value="Ward 7, low bridge near old market" autocomplete="off">
+        </label>
+
+        <label class="field">
+          <span>Volunteer report</span>
+          <textarea id="report" rows="7">Water is rising near the old bridge. Two families are stuck on the far side, one elderly person may need medicine, and the road is cracked near the middle span. Mobile data is weak.</textarea>
+        </label>
+
+        <div class="formGrid">
+          <label class="field">
+            <span>Language</span>
+            <select id="language">
+              <option>English</option>
+              <option>Hindi</option>
+              <option>Tamil</option>
+              <option>Spanish</option>
+              <option>Arabic</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Connectivity</span>
+            <select id="connectivity">
+              <option>Offline / weak signal</option>
+              <option>Intermittent mobile data</option>
+              <option>Online command center</option>
+            </select>
+          </label>
+        </div>
+
+        <button id="analyze" class="primary" type="button">Analyze with Gemma 4</button>
+      </section>
+
+      <section class="panel output">
+        <div class="panelHead">
+          <h2>Triage Packet</h2>
+          <button id="savePacket" class="ghost" type="button">Save packet</button>
+        </div>
+
+        <div class="triageLine">
+          <div>
+            <span class="label">Severity</span>
+            <strong id="severity" class="severity empty">Waiting</strong>
+          </div>
+          <div>
+            <span class="label">Incident</span>
+            <strong id="incidentType">-</strong>
+          </div>
+          <div>
+            <span class="label">Confidence</span>
+            <strong id="confidence">-</strong>
+          </div>
+        </div>
+
+        <div class="columns">
+          <article class="block">
+            <h3>Next 15 Minutes</h3>
+            <ol id="actions"></ol>
+          </article>
+          <article class="block">
+            <h3>Resources</h3>
+            <ul id="resources"></ul>
+          </article>
+        </div>
+
+        <article class="block">
+          <h3>Radio Message</h3>
+          <p id="radio" class="radio">No packet generated yet.</p>
+        </article>
+
+        <article class="block">
+          <h3>Evidence Trail</h3>
+          <ul id="evidence"></ul>
+        </article>
+
+        <details class="jsonBox">
+          <summary>Structured JSON</summary>
+          <pre id="jsonOutput">{}</pre>
+        </details>
+      </section>
+
+      <aside class="panel queue">
+        <h2>Offline Queue</h2>
+        <div class="queueStat">
+          <strong id="queueCount">0</strong>
+          <span>saved packets</span>
+        </div>
+        <ul id="queueList"></ul>
+      </aside>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
