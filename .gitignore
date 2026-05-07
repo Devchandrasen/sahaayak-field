@@ -4,4 +4,6 @@ node_modules/
 Thumbs.db
 *.log
 media/internet-test-*
+media/*.webm
+media/*.mp4
 dist/
